@@ -1,4 +1,5 @@
-JavaScript const
-The const keyword allows you to declare a constant (a JavaScript variable with a constant value).
+An arrow function expression is a compact alternative to a traditional function expression, with some semantic differences and deliberate limitations in usage:
 
-Constants are similar to let variables, except that the value cannot be changed.
+Arrow functions don't have their own bindings to this, arguments, or super, and should not be used as methods.
+Arrow functions cannot be used as constructors. Calling them with new throws a TypeError. They also don't have access to the new.target keyword.
+Arrow functions cannot use yield within their body and cannot be created as generator functions.
