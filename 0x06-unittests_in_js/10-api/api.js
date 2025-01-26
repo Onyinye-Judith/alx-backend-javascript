@@ -1,22 +1,33 @@
 const express = require('express');
+
 const app = express();
-const bodyParser = require('body-parser');
+const port = 7865;
 
-app.use(bodyParser.json());
-... (previous endpoints)
+app.use(express.json());
 
-GET /available_payments
+app.get('/', (req, res) => {
+  res.end('Welcome to the payment system');
+});
+
+app.get('/cart/:id([0-9]+)', (req, res) => {
+  res.end(`Payment methods for cart ${req.params.id}`);
+});
+
 app.get('/available_payments', (req, res) => {
-	const paymentMethods = {
-		credit_cards: true,
-		paypal: false
+  const obj = {
+    payment_methods: {
+      credit_cards: true,
+      paypal: false,
+    },
+  };
+  res.json(obj);
+});
 
-	};
-	res.json({ payment_methods: paymentMethods });
-});
-POST /login
 app.post('/login', (req, res) => {
-	const { userName } = req.body;
-	res.send(`Welcome ${userName}`);
+  const username = req.body.userName;
+  res.end(`Welcome ${username}`);
 });
-module.exports = app;
+
+app.listen(port, () => {
+  console.log('API available on localhost port 7865');
+});
